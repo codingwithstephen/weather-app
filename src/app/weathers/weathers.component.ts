@@ -13,17 +13,12 @@ export class WeathersComponent implements OnInit {
 
   ngOnInit(): void {  }
 
-  removeWeather(ind: number) {
-    let data:any=localStorage.getItem("zipCodes");
-    let newZipCodes='';
-    data=data!.split(',');
-    data.splice(ind,1);
-    for(let i=0;i<data.length;i++)
-    {
-      newZipCodes=newZipCodes===''?(data[i]):(newZipCodes+','+data[i]);
-    }
-    console.log(data);
-    localStorage.setItem("zipCodes",newZipCodes);
-    this.weatherData.weatherData.splice(ind,1);
+  removeWeather(index: number) {
+    this.weatherData.remove(index);
+  }
+
+  type(type: string, weather: any) {
+    console.log(this.weatherData.weatherData);
+    return weather.weather[0].main.toLowerCase() === type;
   }
 }

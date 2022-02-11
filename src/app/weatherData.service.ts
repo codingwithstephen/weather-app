@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
+import { environment } from "src/environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class WeatherDataService {
@@ -15,7 +16,7 @@ export class WeatherDataService {
     }
     let data = this.zipCodes.split(',');
     for (let i = 0; i < data.length; i++) {
-      this.http.get(`https://api.openweathermap.org/data/2.5/weather?zip=${data[i]}&units=imperial&appid=5a4b2d457ecbef9eb2a71e480b947604`, {
+      this.http.get(environment.apiBaseUrl + `weather?zip=${data[i]}&units=imperial&appid=5a4b2d457ecbef9eb2a71e480b947604`, {
         responseType: "json"
       }).subscribe((result) => {
         this.weatherData.push({ ...result, zipcode: data[i] });
@@ -30,10 +31,23 @@ export class WeatherDataService {
   }
 
   addWeatherToList(zipCode: any) {
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&units=imperial&appid=5a4b2d457ecbef9eb2a71e480b947604`, {
+    this.http.get(environment.apiBaseUrl + `weather?zip=${zipCode}&units=imperial&appid=5a4b2d457ecbef9eb2a71e480b947604`, {
       responseType: "json"
     }).subscribe((result) => {
       this.weatherData.push({ ...result, zipcode: zipCode });
     });
+  }
+
+  remove(index: number) {
+    let data:any=localStorage.getItem("zipCodes");
+    let newZipCodes='';
+    data=data!.split(',');
+    data.splice(index,1);
+    for(let i=0;i<data.length;i++)
+    {
+      newZipCodes=newZipCodes===''?(data[i]):(newZipCodes+','+data[i]);
+    }
+    localStorage.setItem("zipCodes",newZipCodes);
+    this.weatherData.splice(index,1);
   }
 }

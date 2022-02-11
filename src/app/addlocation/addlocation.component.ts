@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {WeatherDataService} from "../weatherData.service";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-addlocation',
@@ -15,7 +16,7 @@ export class AddlocationComponent implements OnInit {
   ngOnInit(): void {  }
 
   addLocation(formData: NgForm) {
-    this.http.get(`https://api.openweathermap.org/data/2.5/weather?zip=${formData.value['loc_zipcode']}&appid=5a4b2d457ecbef9eb2a71e480b947604`,{
+    this.http.get(environment.apiBaseUrl + `weather?zip=${formData.value['loc_zipcode']}&appid=5a4b2d457ecbef9eb2a71e480b947604`,{
       responseType:"json"
     }).subscribe((result)=>{
       this.weatherData.addLoc(formData.value['loc_zipcode']);

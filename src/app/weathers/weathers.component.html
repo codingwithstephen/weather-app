@@ -9,10 +9,10 @@
       <span class="close"></span>
     </div>
     <div class="text-center">
-      <img *ngIf="weather.weather[0].main.toLowerCase()==='clouds'" src="https://www.angulartraining.com/images/weather/clouds.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
-      <img *ngIf="weather.weather[0].main.toLowerCase()==='rain'" src="https://www.angulartraining.com/images/weather/rain.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
-      <img *ngIf="weather.weather[0].main.toLowerCase()==='snow'" src="https://www.angulartraining.com/images/weather/snow.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
-      <img *ngIf="weather.weather[0].main.toLowerCase()==='sun' || weather.weather[0].main.toLowerCase()==='clear'" src="https://www.angulartraining.com/images/weather/sun.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
+      <img *ngIf="type('clouds', weather)" src="https://www.angulartraining.com/images/weather/clouds.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
+      <img *ngIf="type('rain', weather)" src="https://www.angulartraining.com/images/weather/rain.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
+      <img *ngIf="type('snow', weather)" src="https://www.angulartraining.com/images/weather/snow.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
+      <img *ngIf="type('sun', weather) || type('clear', weather)" src="https://www.angulartraining.com/images/weather/sun.png" class="card-img-top" alt="WEATHER_IMAGE" class="width-200px">
     </div>
     <div class="card-body">
       <h5 class="card-title">{{weather.name}}</h5>
